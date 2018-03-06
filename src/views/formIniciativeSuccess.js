@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './css/content.css';
+import '../css/content.css';
 import propTypes from 'prop-types';
 import firebase from 'firebase';
 
-class detailIniciative extends Component {
+class formIniciativeSuccess extends Component {
 
 
     constructor(props) {
@@ -31,4 +31,4 @@ class detailIniciative extends Component {
     }
 }
 
-export default detailIniciative;
+export default formIniciativeSuccess;

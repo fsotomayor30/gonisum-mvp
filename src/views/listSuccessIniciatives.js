@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './css/content.css';
+import '../css/content.css';
 import propTypes from 'prop-types';
 import firebase from 'firebase';
 
-class listCommitteeIniciatives extends Component {
+class listSuccessIniciatives extends Component {
 
 
     constructor(props) {
@@ -31,4 +31,4 @@ class listCommitteeIniciatives extends Component {
     }
 }
 
-export default listCommitteeIniciatives;
+export default listSuccessIniciatives;
