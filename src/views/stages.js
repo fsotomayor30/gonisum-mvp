@@ -38,7 +38,7 @@ class stages extends Component {
             <span className="card-title" style={{color: 'black'}}>Propose Iniciative</span>
             </div>
             <div className="card-action">
-              <a href="#">Create an Iniciative</a>
+              <a href="/newiniciative">Create an Iniciative</a>
             </div>
           </div>
         </div>

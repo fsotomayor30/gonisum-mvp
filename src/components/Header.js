@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavItem} from 'react-materialize';
 import firebase from 'firebase';
-import './css/header.css';
+import '../css/header.css';
 
 class Header extends Component {
 

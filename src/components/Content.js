@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './css/content.css';
+import '../css/content.css';
 import propTypes from 'prop-types';
 import firebase from 'firebase';
 
