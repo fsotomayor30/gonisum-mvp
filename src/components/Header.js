@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavItem} from 'react-materialize';
 import firebase from 'firebase';
-import './css/header.css';
+import '../css/header.css';
 
 class Header extends Component {
 
@@ -47,15 +47,15 @@ class Header extends Component {
     render() {
         if (this.state.user) {
             return (
-                <Navbar style={{ backgroundColor: 'rgb(73, 171, 210)' }}>
-                    <NavItem href='/'>goNisum</NavItem>                    
+                <Navbar fixed style={{ backgroundColor: 'rgb(73, 171, 210)' }}>
+                    <NavItem href='/'>GoNisum</NavItem>                    
                     <NavItem href="/profile" style={{ float: 'right'}}>{this.state.user.displayName}
                     <img id="image" src={this.state.user.photoURL}
                         className="image-user"
                         alt={this.state.user.displayName}/>
                     </NavItem>
                     <NavItem onClick={this.handleLogout} style={{ float: 'right'}}>Logout</NavItem>
-                    <NavItem href='/iniciatives' style={{ float: 'right'}}>Iniciatives</NavItem>
+                    <NavItem href='/listAprovedIniciatives' style={{ float: 'right'}}>Iniciatives</NavItem>
                     <NavItem href='/myiniciatives' style={{ float: 'right' }}>My Iniciatives</NavItem>
                 </Navbar>
             )
