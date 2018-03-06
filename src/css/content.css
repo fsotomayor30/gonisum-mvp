@@ -2,3 +2,7 @@
     border: solid 1px black;
     margin: 15px;
 }
+
+.Content {
+    min-height: calc(100vh - 120px);    
+}
