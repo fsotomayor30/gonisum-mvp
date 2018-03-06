@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import propTypes from 'prop-types';
+
 import './App.css';
-import {Button, Icon} from 'react-materialize';
-import Header from './Header'
-import Content from './Content'
-import Footer from './Footer'
+
+import Header from './components/Header'
+import Content from './components/Content'
+import Footer from './components/Footer'
 
 class App extends Component {
+  static propTypes = {
+    children: propTypes.object.isRequired,
+  };
   render() {
+    const { children } = this.props;
     return (
       <div className="App">
 
         <Header/>
-        <Content/>
+        <Content body={children}/>
         <Footer/>
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavItem, Icon } from 'react-materialize';
+import { Navbar, NavItem} from 'react-materialize';
 import firebase from 'firebase';
 import './css/header.css';
 
@@ -31,7 +31,7 @@ class Header extends Component {
         e.preventDefault();
         e.stopPropagation();
         firebase.auth().signOut()
-        window.location.href = '/index'
+        window.location.href = '/'
     }
 
     componentWillMount() {
@@ -43,14 +43,12 @@ class Header extends Component {
         )
     }
 
-
+    
     render() {
         if (this.state.user) {
             return (
                 <Navbar style={{ backgroundColor: 'rgb(73, 171, 210)' }}>
-                    <NavItem href='/index'>goNisum</NavItem>
-                                      
-                    
+                    <NavItem href='/'>goNisum</NavItem>                    
                     <NavItem href="/profile" style={{ float: 'right'}}>{this.state.user.displayName}
                     <img id="image" src={this.state.user.photoURL}
                         className="image-user"
@@ -58,15 +56,13 @@ class Header extends Component {
                     </NavItem>
                     <NavItem onClick={this.handleLogout} style={{ float: 'right'}}>Logout</NavItem>
                     <NavItem href='/iniciatives' style={{ float: 'right'}}>Iniciatives</NavItem>
-                    <NavItem href='/iniciatives' style={{ float: 'right' }}>My Iniciatives</NavItem>
-
-
+                    <NavItem href='/myiniciatives' style={{ float: 'right' }}>My Iniciatives</NavItem>
                 </Navbar>
             )
         } else {
             return (
                 <Navbar style={{ backgroundColor: 'rgb(73, 171, 210)' }}>
-                    <NavItem href='/index'>goNisum</NavItem>
+                    <NavItem href='/'>goNisum</NavItem>
                     <NavItem onClick={this.handleAuth} style={{ float: 'right', marginRight: 20 }}>Login</NavItem>
 
                 </Navbar>

@@ -1,9 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 import firebase from 'firebase';
 import './index.css';
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import { BrowserRouter as Router } from 'react-router-dom';
+import App from './App';
+
+//Routes
+import AppRoutes from './routes';
 
 var config = {
     apiKey: "AIzaSyCfOOgzheQLfHXt7l76nxtdkRf_JiROyF0",
@@ -15,5 +19,8 @@ var config = {
   };
   firebase.initializeApp(config);
 
-ReactDOM.render(<App />, document.getElementById('root'));
+render(<Router>
+    <AppRoutes />
+</Router>,
+document.getElementById('root'));
 registerServiceWorker();
