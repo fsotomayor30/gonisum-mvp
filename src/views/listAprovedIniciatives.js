@@ -19,7 +19,7 @@ export default class listAprovedIniciatives extends Component {
             let iniciatives = snapshot.val();
             let newState = [];
             for (let iniciative in iniciatives) {
-                if (iniciatives[iniciative].approved === true) {
+                if (iniciatives[iniciative].state === 'Approved') {
                     newState.push({
                         id: iniciative,
                         title: iniciatives[iniciative].title,
@@ -33,7 +33,7 @@ export default class listAprovedIniciatives extends Component {
                         picture: iniciatives[iniciative].picture,
                         userId: iniciatives[iniciative].userId,
                         date: iniciatives[iniciative].date,
-                        approved: iniciatives[iniciative].approved,
+                        state: iniciatives[iniciative].state,
                         like: iniciatives[iniciative].like,
                         progressMoney: iniciatives[iniciative].progressMoney,
                         photoUser: iniciatives[iniciative].photoUser,

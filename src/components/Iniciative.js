@@ -9,8 +9,8 @@ export default class Initiative extends Component {
 	}
 
 	render() {
-		console.log(this.props.initiative);
-
+    console.log(this.props.initiative);
+    
 		return (
 			<Col s={12} l={6}>
 				<Collection>

@@ -39,7 +39,7 @@ class detailIniciativeCommittee extends Component {
     Approve() {
         const dbRefPropose = firebase.database().ref('iniciatives/' + this.state.id);
         dbRefPropose.update({
-            "approved": true,
+            "state": 'Approved',
             "commentCommittee": this.state.content,
         });
         alert("Successfully approved");
@@ -51,7 +51,7 @@ class detailIniciativeCommittee extends Component {
     Reject() {
         const dbRefPropose = firebase.database().ref('iniciatives/' + this.state.id);
         dbRefPropose.update({
-            "approved": false,
+            "state": 'Reject',
             "commentCommittee": this.state.content,
         });
         alert("Successfully rejected");
@@ -78,7 +78,7 @@ class detailIniciativeCommittee extends Component {
                         picture: iniciatives[iniciative].picture,
                         userId: iniciatives[iniciative].userId,
                         date: iniciatives[iniciative].date,
-                        approved: iniciatives[iniciative].approved,
+                        state: iniciatives[iniciative].state,
                         like: iniciatives[iniciative].like,
                         progressMoney: iniciatives[iniciative].progressMoney,
                         photoUser: iniciatives[iniciative].photoUser,

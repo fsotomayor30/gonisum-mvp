@@ -73,7 +73,7 @@ class myIniciatives extends Component {
                 <Row>
                     {this.state.iniciatives.map((iniciative, i) => {
                         return (
-                            <Iniciative />
+                            <Iniciative initiative={iniciative} />
                         )
                     })}
 
