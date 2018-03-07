@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../css/content.css';
-import propTypes from 'prop-types';
 import firebase from 'firebase';
 import { Row, Input } from 'react-materialize';
 
@@ -15,12 +14,16 @@ class newIniciative extends Component {
             moneyMin: 0,
             moneyMax: 0,
             description: '',
-            collaborators:'',
-            participantMin:0,
-            participantMax:0,
+            collaborators: '',
+            participantMin: 0,
+            participantMax: 0,
             uploadValue: 0,
             picture: null,
-            date:'',
+            date: '',
+            like: 0,
+            photoUser: '',
+            progressMoney: 0,
+            aproved: 'not reviewed',
             user: null
         };
         this.handleUpload = this.handleUpload.bind(this);
@@ -33,64 +36,73 @@ class newIniciative extends Component {
         const storageRef = firebase.storage().ref(`/iniciatives/${file.name}`);
         const task = storageRef.put(file);
         task.on('state_changed', snapshot => {
-          let percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          this.setState({
-            uploadValue: percent
-          })
-        }, error => {
-          console.log(error.message)
-        }, () => {
-          this.setState({
-            uploadValue: 100,
-            picture: task.snapshot.downloadURL
-          })
-        });
-      }
-
-      handleSave() {
-        if (this.state.user) {
-          if (this.state.title === '' ||
-          this.state.categories === '' ||
-          this.state.moneyMin === 0 ||
-          this.state.moneyMax === 0 ||
-          this.state.description === '' ||
-          this.state.picture === null) {
-            alert("there can not be empty fields");
-          } else {
-            const record = {
-              title: this.state.title,
-              categories: this.state.categories,
-              moneyMax: parseInt(this.state.moneyMax,10),
-              moneyMin: parseInt(this.state.moneyMin,10),
-              collaborators: this.state.collaborators,
-              participantMin: this.state.participantMin,
-              participantMax: this.state.participantMax,
-              picture: this.state.picture,
-              userId: this.state.user.uid,
-              date: this.state.date,
-            };
-    
-            const dbRef = firebase.database().ref('iniciatives');
-            const newIniciative = dbRef.push();
-            newIniciative.set(record);
-            alert("added correctly");
-    
+            let percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             this.setState({
-              title: '',
-              categories: '',
-              moneyMin: 0,
-              moneyMax:0,
-              collaborators:'',
-              participantMax:0,
-              participantMin:0,
-              date:'',
-              description: '',
-              uploadValue: 0,
-              picture: null,
-            });
-          }
+                uploadValue: percent
+            })
+        }, error => {
+            console.log(error.message)
+        }, () => {
+            this.setState({
+                uploadValue: 100,
+                picture: task.snapshot.downloadURL
+            })
+        });
+    }
+
+    handleSave() {
+        if (this.state.user) {
+            if (this.state.title === '' ||
+                this.state.categories === '' ||
+                this.state.moneyMin === 0 ||
+                this.state.moneyMax === 0 ||
+                this.state.description === '' ||
+                this.state.picture === null) {
+                alert("there can not be empty fields");
+            } else {
+                const record = {
+                    description: this.state.description,
+                    title: this.state.title,
+                    categories: this.state.categories,
+                    moneyMax: parseInt(this.state.moneyMax, 10),
+                    moneyMin: parseInt(this.state.moneyMin, 10),
+                    collaborators: this.state.collaborators,
+                    participantMin: parseInt(this.state.participantMin, 10),
+                    participantMax: parseInt(this.state.participantMax, 10),
+                    picture: this.state.picture,
+                    userId: this.state.user.uid,
+                    date: this.state.date,
+                    approved: this.state.aproved,
+                    like: this.state.like,
+                    progressMoney: this.state.progressMoney,
+                    photoUser: this.state.user.photoURL,
+                    displayUser: this.state.user.displayName,
+                    commentCommittee: '',
+                };
+
+                const dbRef = firebase.database().ref('iniciatives');
+                const newIniciative = dbRef.push();
+                newIniciative.set(record);
+
+
+                this.setState({
+                    title: '',
+                    categories: '',
+                    moneyMin: 0,
+                    moneyMax: 0,
+                    collaborators: '',
+                    participantMax: 0,
+                    participantMin: 0,
+                    date: '',
+                    description: '',
+                    uploadValue: 0,
+                    picture: null,
+                });
+            }
         }
-      }
+        alert("Added correctly");
+
+    }
 
     handleInputChange(event) {
         const name = event.target.name;
@@ -144,6 +156,7 @@ class newIniciative extends Component {
                             s={6}
                             onChange={this.handleInputChange}
                             name="moneyMin"
+                            value={this.state.moneyMin}
                             id="moneyMin" type="number"
                             className="form-control"
                             required="required" />
@@ -152,7 +165,7 @@ class newIniciative extends Component {
                             icon="attach_money"
                             label="Money Max:"
                             s={6}
-
+                            value={this.state.moneyMax}
                             onChange={this.handleInputChange}
                             name="moneyMax"
                             id="moneyMax" type="number"
@@ -184,15 +197,15 @@ class newIniciative extends Component {
                             name="collaborators"
                             id="collaborators" />
 
-                            <Input
-                                icon="date_range"
-                                s={6}
-                                label="Date:"
-                                name='date'
-                                type='date'
-                                value={this.state.date}
-                                onChange={this.handleInputChange} />
-                        
+                        <Input
+                            icon="date_range"
+                            s={6}
+                            label="Date:"
+                            name='date'
+                            type='date'
+                            value={this.state.date}
+                            onChange={this.handleInputChange} />
+
                     </Row>
 
                     <Row>
@@ -200,7 +213,7 @@ class newIniciative extends Component {
                             icon="group"
                             label="Participant Min:"
                             s={6}
-
+                            value={this.state.participantMin}
                             onChange={this.handleInputChange}
                             name="participantMin"
                             id="participantMin" type="number"
@@ -211,7 +224,7 @@ class newIniciative extends Component {
                             icon="group"
                             label="Participant Max:"
                             s={6}
-
+                            value={this.state.participantMax}
                             onChange={this.handleInputChange}
                             name="participantMax"
                             id="participantMax" type="number"
@@ -227,7 +240,8 @@ class newIniciative extends Component {
                             <div className="file-field input-field">
                                 <div className="btn">
                                     <i className="material-icons">add_to_photos</i>  Image
-                                <input type="file" onChange={this.handleUpload}
+                                <input type="file"
+                                        onChange={this.handleUpload}
                                         name="file"
                                         id="file"
                                         required="required" />

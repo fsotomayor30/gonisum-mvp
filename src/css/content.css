@@ -5,5 +5,18 @@
 
 body{
 background-color: rgb(242,242,242);
-
 }
+
+.Content {
+    min-height: calc(100vh - 120px);    
+}
+
+.image-user-iniciative{
+    width:35px;
+    height:35px;
+    border-radius: 45%;
+    margin-top: 15px
+  
+  }
+
+  pre  {  white-space: pre-wrap  }

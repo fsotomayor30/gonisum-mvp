@@ -14,6 +14,7 @@ import detailIniciativeSuccess from './views/detailIniciativeSuccess';
 import formIniciativeSuccess from './views/formIniciativeSuccess';
 import listCommitteeIniciatives from './views/listCommitteeIniciatives';
 import listSuccessIniciatives from './views/listSuccessIniciatives';
+import detailIniciativeCommittee from './views/detailIniciativeCommittee';
 
 const AppRoutes = () =>
     <App>
@@ -28,7 +29,7 @@ const AppRoutes = () =>
             <Route exact path="/formIniciativeSuccess" component={formIniciativeSuccess} />
             <Route exact path="/listCommitteeIniciatives" component={listCommitteeIniciatives} />
             <Route exact path="/listSuccessIniciatives" component={listSuccessIniciatives} />
-        
+            <Route exact path="/detailIniciativeCommittee/:id" component={detailIniciativeCommittee} />
         </Switch>
     </App>;
 
