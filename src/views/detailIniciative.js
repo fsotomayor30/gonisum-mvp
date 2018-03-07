@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/content.css';
 import firebase from 'firebase';
+import Iniciative from '../components/Iniciative'
 
 class detailIniciative extends Component {
 
@@ -23,7 +24,7 @@ class detailIniciative extends Component {
 
     render() {
         return (
-            <div></div>
+            <Iniciative/>
 
         )
 

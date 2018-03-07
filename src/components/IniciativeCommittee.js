@@ -1,70 +1,49 @@
 import React, { Component } from 'react';
 
-import { Row, Card, Chip, CardPanel, Col, MediaBox} from 'react-materialize';
+import { Row, Card, Chip, CardPanel, Col, MediaBox, Collection, CollectionItem, Icon, ProgressBar} from 'react-materialize';
 import '../css/content.css';
 
 
 class Iniciatives extends Component {
     constructor(props) {
         super(props);
-        this.checkIniciative = this.checkIniciative.bind(this);
     }
 
-    checkIniciative = () => {
-        window.location = '/detailIniciativeCommittee/' + this.props.id;
-    }
 
     render() {
-
         return (
-            <Card style={{ marginTop: 40, marginLeft: 20, marginRight: 20 }}>
+            
+              
+                <CollectionItem href={"/detailIniciativeCommittee/"+this.props.id}>
+                  <h5>{this.props.title}</h5>
+                  <hr/>
+                  <Chip>
+                    <img src={this.props.photoUser}  />
+                    {this.props.displayUser}
+                      </Chip>
+                  <Row>
+                    <Col m={6}>
+                      <img width='100%' src={this.props.picture} alt="image" style={{paddingTop:15, borderRadius:7}} />
+                      <Row>
+                        <span>Min: {this.props.moneyMin} </span>
+                        <span>Max: {this.props.moneyMax} </span><Icon small>monetization_on</Icon>
+                      </Row>
 
-                <Row>
-                    <Col l={3}>
-                        <MediaBox style={{ marginTop: '30%' }} className="responsive-img" src={this.props.picture} caption="A demo media box1" width="300px" />
+      
                     </Col>
-                    <Col l={9}>
-                        <Row>
-                        <Row><Col l={12}><Chip>
-                                <img src={this.props.photoUser} alt='Contact Person' />
-                                {this.props.displayUser}
-                            </Chip></Col></Row>
-                            <Row>
-                                <Col l={6}>
-                                    <CardPanel className="teal lighten-4 black-text">
-                                        <p style={{ textAlign: "justify" }}><i className="material-icons small">title</i>Title: {this.props.title}</p>
-                                        <p style={{ textAlign: "justify" }}><i className="material-icons small">list</i>Category: {this.props.category}</p>
-                                    </CardPanel>
-                                </Col>
-                                <Col l={6} >
-                                    <CardPanel className="teal lighten-4 black-text">
-                                        <p style={{ textAlign: "justify" }}><i className="material-icons small">supervisor_account</i>Participant Min: {this.props.participantMin}</p>
-                                        <p style={{ textAlign: "justify" }}><i className="material-icons small">attach_money</i>Money Min: {this.props.moneyMin}</p>
-
-                                    </CardPanel>
-                                </Col>
-                            </Row>
-                            
-                            <Row>
-                                <Col l={12}>
-                                    <CardPanel className="teal lighten-4 black-text"><pre style={{ textAlign: "justify" }}><i className="material-icons small">description</i>Description: {this.props.description}</pre></CardPanel>
-                                </Col>
-                            </Row>
-                        </Row>
+                    <Col m={6}>
+                      <CardPanel className="teal lighten-4 black-text">
+                        <span>{this.props.description}</span>
+                      </CardPanel>
                     </Col>
+                  </Row>
+      
+                </CollectionItem>
+              
+            
+          )
 
-                </Row>
-                <center>
-                    <button
-                        type="button"
-                        style={{ marginLeft: 5 }}
-                        onClick={this.checkIniciative}
-                        className="btn btn-success"><i className="material-icons">add_circle_outline</i> Check</button>
-                </center>
-                <br />
-
-            </Card>
-        );
+       
     }
 }
 

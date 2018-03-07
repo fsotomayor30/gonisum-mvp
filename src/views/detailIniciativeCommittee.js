@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../css/content.css';
 import firebase from 'firebase';
-import { Icon, Row, Card, Chip, CardPanel, Col, MediaBox, Input } from 'react-materialize';
+import { Icon, Row, Card, Chip, CardPanel, Col, ProgressBar, MediaBox, Input, CollectionItem } from 'react-materialize';
 
 class detailIniciativeCommittee extends Component {
 
@@ -14,8 +14,8 @@ class detailIniciativeCommittee extends Component {
             iniciatives: [],
             content: '',
         };
-        this.Approve=this.Approve.bind(this);
-        this.Reject=this.Reject.bind(this);
+        this.Approve = this.Approve.bind(this);
+        this.Reject = this.Reject.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
@@ -98,24 +98,25 @@ class detailIniciativeCommittee extends Component {
             <div>
                 {this.state.iniciatives.map((iniciative, i) => {
                     return (
-                        <Card style={{ marginTop: 40, marginLeft: 20, marginRight: 20 }}>
+                        
+                        <Card style={{ marginTop: 40, marginLeft: 20, marginRight: 20 }} key={i}>
                             <h1>{iniciative.title}
+                                <hr />
                                 <h4 style={{ textAlign: 'center' }}> Categorie: {iniciative.categories} </h4>
                             </h1>
+                            <Chip>
+                                <img src={iniciative.photoUser} alt='Contact Person' />
+                                {iniciative.displayUser}
+                            </Chip>
                             <Row>
                                 <Col l={3}>
                                     <MediaBox style={{ marginTop: '30%' }} className="responsive-img" src={iniciative.picture} caption="A demo media box1" width="300px" />
+                                    
                                 </Col>
                                 <Col l={9}>
-
-                                    <Chip>
-                                        <img src={iniciative.photoUser} alt='Contact Person' />
-                                        {iniciative.displayUser}
-                                    </Chip>
-
-
-                                    <CardPanel className="teal lighten-4 black-text">
+                                <CardPanel className="teal lighten-4 black-text">
                                         <Row>
+
                                             <Col l={4}>
                                                 <p style={{ textAlign: "justify" }}><Icon>attach_money</Icon>Money Min: {iniciative.moneyMin}</p>
                                                 <p style={{ textAlign: "justify" }}><Icon>attach_money</Icon>Money Max: {iniciative.moneyMax}</p>
@@ -172,6 +173,7 @@ class detailIniciativeCommittee extends Component {
                                 <br />
                             </div>
                         </Card>
+                        
                     )
                 })}
             </div>
