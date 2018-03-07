@@ -1,16 +1,8 @@
 import React, { Component } from 'react'
-import firebase from 'firebase'
-import { Collection, CollectionItem, Card, CardTitle, Col, Row, CardPanel, ProgressBar, Icon, Chip } from 'react-materialize'
+import { Collection, CollectionItem, Col, Row, CardPanel, ProgressBar, Icon, Chip } from 'react-materialize'
 
 export default class Initiative extends Component {
-
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
-		console.log(this.props.initiative);
-
 		return (
 			<Col s={12} l={6}>
 				<Collection>
@@ -23,16 +15,16 @@ export default class Initiative extends Component {
 						</Chip>
 						<Row>
 							<Col m={6}>
-								<img width='100%' src={this.props.initiative.picture} alt="image" style={{ paddingTop: 15, borderRadius: 7 }} />
+								<img width='100%' src={this.props.initiative.picture} alt="initiative" 
+								style={{ paddingTop: 15, borderRadius: 7 }} />
 								<Row>
-									<span>{this.props.initiative.progressMoney}/100 </span><Icon small>monetization_on</Icon>
+									<span>{this.props.initiative.progressMoney}/{this.props.initiative.moneyMin} </span><Icon small>monetization_on</Icon>
 									<ProgressBar progress={70} />
 								</Row>
 								<Row>
 									<span>{this.props.initiative.like}  </span><Icon small>thumb_up</Icon><span>  </span>
 									<span>{this.props.initiative.collaborators} </span><Icon small>comment</Icon>
 								</Row>
-
 							</Col>
 							<Col m={6}>
 								<CardPanel className="teal lighten-4 black-text">
