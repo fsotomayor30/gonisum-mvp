@@ -1,58 +1,50 @@
 import React, { Component } from 'react'
 import '../css/content.css'
-import { Col, Card, Row , Button, Icon, Input} from 'react-materialize'
+import { Col, Card, Row, Button, Icon, Input, Collapsible, CollapsibleItem } from 'react-materialize'
 import propTypes from 'prop-types'
 import firebase from 'firebase'
 import Iniciative from '../components/Iniciative'
 
-class listAprovedIniciatives extends Component {
+export default class listAprovedIniciatives extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            user: null,
         };
-    }
-
-    componentWillMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            this.setState({
-                user: user
-            });
-        }
-        )
     }
 
     render() {
         return (
             <Row>
-                <Col s={3}>
-                    <Card  title='Menu'>
+                <Col m={4} l={3}>
+                    <Card title='Filters'>
                         <div>
                             <Row>
-                                <Input s={12} label="Search" validate><Icon>search</Icon></Input> 
+                                <Input s={12} label="Search" validate><Icon>search</Icon></Input>
                             </Row>
-                            <Button waves='light'>button<Icon left>cloud</Icon></Button>
+                            <Collapsible>
+                                <CollapsibleItem header='Categories' icon='whatshot'>
+                                    <Button waves='light'>button<Icon right>cloud</Icon></Button>
+                                    <Button waves='light'>button<Icon right>cloud</Icon></Button>
+                                    <Button waves='light'>button<Icon right>cloud</Icon></Button>
+                                </CollapsibleItem>
+                            </Collapsible>
                             <Button waves='light'>button<Icon right>cloud</Icon></Button>
                             <Button waves='light'>button<Icon right>cloud</Icon></Button>
                             <Button waves='light'>button<Icon right>cloud</Icon></Button>
                             <Button waves='light'>button<Icon right>cloud</Icon></Button>
-                            <Button waves='light'>button<Icon right>cloud</Icon></Button>
-                            <Button waves='light'>button<Icon right>cloud</Icon></Button>
-                            <Button waves='light'>button<Icon right>cloud</Icon></Button>
-                            <Button waves='light'>button<Icon right>cloud</Icon></Button>
-
                         </div>
                     </Card>
                 </Col>
-                <Col s={9}>
-                    <Col s={12} m={6}>
+                <Col m={8} l={9}>
+                    <Row>
                         <Iniciative />
-                </Col>
+                        <Iniciative />
+                        <Iniciative />
+
+                    </Row>
                 </Col>
             </Row>
         )
     }
 }
-
-export default listAprovedIniciatives;
