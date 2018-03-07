@@ -23,7 +23,7 @@ class newIniciative extends Component {
             like: 0,
             photoUser: '',
             progressMoney: 0,
-            aproved: 'not reviewed',
+            state: 'not reviewed',
             user: null
         };
         this.handleUpload = this.handleUpload.bind(this);
@@ -72,7 +72,7 @@ class newIniciative extends Component {
                     picture: this.state.picture,
                     userId: this.state.user.uid,
                     date: this.state.date,
-                    approved: this.state.aproved,
+                    state: this.state.state,
                     like: this.state.like,
                     progressMoney: this.state.progressMoney,
                     photoUser: this.state.user.photoURL,
