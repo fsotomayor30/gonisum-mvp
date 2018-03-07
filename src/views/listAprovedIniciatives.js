@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../css/content.css'
-import { Col, Card, Row, Button, Icon, Input, Collapsible, CollapsibleItem } from 'react-materialize'
+import { Col, Card, Row, Button, Icon, Input, Collapsible, CollapsibleItem, NavItem, Dropdown, Collection, CollectionItem } from 'react-materialize'
 import propTypes from 'prop-types'
 import firebase from 'firebase'
 import Iniciative from '../components/Iniciative'
@@ -9,8 +9,6 @@ export default class listAprovedIniciatives extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-        };
     }
 
     render() {
@@ -24,14 +22,26 @@ export default class listAprovedIniciatives extends Component {
                             </Row>
                             <Collapsible>
                                 <CollapsibleItem header='Categories' icon='whatshot'>
-                                    <Button waves='light'>button<Icon right>cloud</Icon></Button>
-                                    <Button waves='light'>button<Icon right>cloud</Icon></Button>
-                                    <Button waves='light'>button<Icon right>cloud</Icon></Button>
+                                    <Collection>
+                                        <CollectionItem href='#'>Alvin</CollectionItem>
+                                        <CollectionItem href='#'>Alvin</CollectionItem>
+                                        <CollectionItem href='#'>Alvin</CollectionItem>
+                                    </Collection>
+                                </CollapsibleItem>
+                                <CollapsibleItem header='Likes' icon='thumb_up'>
+                                    <Collection>
+                                        <CollectionItem href='#'>Alvin</CollectionItem>
+                                        <CollectionItem href='#'>Alvin</CollectionItem>
+                                    </Collection>
+                                </CollapsibleItem>
+                                <CollapsibleItem header='Categories' icon='whatshot'>
+                                    <Collection>
+                                        <CollectionItem href='#'>Alvin</CollectionItem>
+                                        <CollectionItem href='#'>Alvin</CollectionItem>
+                                        <CollectionItem href='#'>Alvin</CollectionItem>
+                                    </Collection>
                                 </CollapsibleItem>
                             </Collapsible>
-                            <Button waves='light'>button<Icon right>cloud</Icon></Button>
-                            <Button waves='light'>button<Icon right>cloud</Icon></Button>
-                            <Button waves='light'>button<Icon right>cloud</Icon></Button>
                             <Button waves='light'>button<Icon right>cloud</Icon></Button>
                         </div>
                     </Card>
