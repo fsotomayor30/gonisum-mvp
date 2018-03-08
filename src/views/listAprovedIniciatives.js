@@ -49,6 +49,14 @@ export default class listAprovedIniciatives extends Component {
         });
     }
 
+    filter = (cat) => {
+        this.setState({
+            iniciatives: this.state.iniciatives.filter(
+                (iniciative) => iniciative.categories === cat
+            )
+        });
+    };
+
     render() {
         return (
             <Row>

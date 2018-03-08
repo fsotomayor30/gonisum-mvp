@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/content.css';
 import firebase from 'firebase';
 import IniciateCommittee from '../components/IniciativeCommittee'
-import { Col, Card, Row, Collection, CardPanel } from 'react-materialize'
+import { Col, Row, Collection, CardPanel } from 'react-materialize'
 
 
 class listCommitteeIniciatives extends Component {
@@ -61,15 +61,15 @@ class listCommitteeIniciatives extends Component {
 
     render() {
 
-        if(this.state.iniciatives.length===0){
-            return(
-                <CardPanel style={{margin: 50}}className="teal lighten-4 black-text">
-            <h1>There are no initiatives to evaluate</h1>
-            <img src='http://avap.es/wp-content/uploads/2015/07/Tiempo-de-evaluar-las-pol%C3%ADticas-p%C3%BAblicas.jpg' alt='Person' />
-        </CardPanel>
-            
-        )
-        }else{
+        if (this.state.iniciatives.length === 0) {
+            return (
+                <CardPanel style={{ margin: 50 }} className="teal lighten-4 black-text">
+                    <h1>There are no initiatives to evaluate</h1>
+                    <img src='http://avap.es/wp-content/uploads/2015/07/Tiempo-de-evaluar-las-pol%C3%ADticas-p%C3%BAblicas.jpg' alt='Person' />
+                </CardPanel>
+
+            )
+        } else {
             return (
                 <Row>
                     <Col m={12} l={12}>
@@ -89,14 +89,14 @@ class listCommitteeIniciatives extends Component {
                                     </Col>
                                 )
                             })}
-    
+
                         </Row>
                     </Col>
                 </Row>
-    
+
             )
         }
-       
+
 
     }
 }
