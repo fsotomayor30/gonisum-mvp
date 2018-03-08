@@ -15,8 +15,8 @@ export default class Initiative extends Component {
 						</Chip>
 						<Row>
 							<Col m={6}>
-								<img width='100%' src={this.props.initiative.picture} alt="initiative" 
-								style={{ paddingTop: 15, borderRadius: 7 }} />
+								<img  src={this.props.initiative.picture} alt="initiative" 
+								style={{  width: 150, height: 150,paddingTop: 15, borderRadius: 7 }} />
 								<Row>
 									<span>{this.props.initiative.progressMoney}/{this.props.initiative.moneyMin} </span><Icon small>monetization_on</Icon>
 									<ProgressBar progress={70} />

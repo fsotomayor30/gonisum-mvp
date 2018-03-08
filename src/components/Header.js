@@ -56,8 +56,8 @@ class Header extends Component {
                         alt={this.state.user.displayName}/>
                     </NavItem>
                     
-                    <NavItem href='/listAprovedIniciatives' style={{ float: 'right'}}>Iniciatives</NavItem>
-                    <NavItem href='/myiniciatives' style={{ float: 'right' }}>My Iniciatives</NavItem>
+                    <NavItem href='/listAprovedIniciatives' style={{ float: 'right'}}>Initiatives</NavItem>
+                    <NavItem href='/myiniciatives' style={{ float: 'right' }}>My Initiatives</NavItem>
                 </Navbar>
             )
         } else {

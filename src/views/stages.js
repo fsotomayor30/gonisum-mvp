@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/content.css';
 import firebase from 'firebase';
+import { Col, Row, MediaBox } from 'react-materialize'
 
 class stages extends Component {
 
@@ -24,60 +25,62 @@ class stages extends Component {
 
     if (this.state.user) {
       return (
-        <div className="row" style={{ marginTop: 70 }}>
-          <div className="col offset-l1"></div>
-          <div className=" col l3">
+        <Row style={{ marginTop: 70 }}>
+          <Col l={4} m={12}>
             <div className="card">
               <div className="card-image">
-                <img alt="uno" src="https://image.freepik.com/vector-gratis/hombre-de-negocios-con-una-gran-idea_1012-219.jpg" />
-
+                <center>
+                  <img alt="uno" style={{ width: 250, height: 250, maxWidth: 250, maxHeight: 250 }} src="https://image.freepik.com/vector-gratis/hombre-de-negocios-con-una-gran-idea_1012-219.jpg" />
+                </center>
               </div>
               <div className="card-content">
-                <span className="card-title" style={{ color: 'black' }}>Propose Iniciative</span>
+                <span className="card-title" style={{ color: 'black' }}>Propose Initiative</span>
               </div>
               <div className="card-action">
-                <a href="/newiniciative">Create an Iniciative</a>
+                <a href="/newiniciative">Create an Initiative</a>
               </div>
             </div>
-          </div>
+          </Col>
 
-          <div className=" col l3">
+          <Col l={4} m={12}>
             <div className="card">
               <div className="card-image">
-                <img alt="dos" src="https://media.wired.com/photos/5955b36196d7ef123a1d4273/master/w_1800,c_limit/529386299green-F-TOP-ART.jpg" />
-
+                <center>
+                  <img alt="dos" style={{ width: 250, height: 250, maxWidth: 250, maxHeight: 250 }} src="https://media.wired.com/photos/5955b36196d7ef123a1d4273/master/w_1800,c_limit/529386299green-F-TOP-ART.jpg" />
+                </center>
               </div>
               <div className="card-content">
                 <span className="card-title" style={{ color: 'black' }} >Invest in an Iniciative</span>
               </div>
               <div className="card-action">
-                <a href="/listAprovedIniciatives">Explore new iniciatives</a>
+                <a href="/listAprovedIniciatives">Explore initiatives</a>
               </div>
             </div>
-          </div>
+          </Col>
 
-          <div className=" col l3">
+          <Col l={4} m={12}>
             <div className="card">
               <div className="card-image">
-                <img alt="tres" src="http://tamgroup-ye.com/wp-content/uploads/2016/12/Success-group-award-590x260.jpg" />
-
+                <center>
+                  <img alt="tres" style={{ width: 250, height: 250, maxWidth: 250, maxHeight: 250 }} src="https://cacm.acm.org/system/assets/0000/9797/111912_CACMpg36_Why-We-Need.large.jpg?1476779408&1353363907" />
+                </center>
               </div>
               <div className="card-content">
                 <span className="card-title" style={{ color: 'black' }}>Shared result</span>
               </div>
               <div className="card-action">
-                <a href="/listSuccessIniciatives">See successful iniciatives</a>
+                <a href="/listSuccessIniciatives">See successful initiatives</a>
               </div>
             </div>
-          </div>
+          </Col>
 
-        </div>
+        </Row>
       );
     } else {
       return (
-        <div className="row" style={{ marginTop: 70 }}>
-          <div className="col offset-l1"></div>
-          <div className=" col l3">
+        <Row style={{ marginTop: 70 }}>
+          <Col offset={"l1"}></Col>
+          <Col l={3}>
             <div className="card">
               <div className="card-image">
                 <img alt="dos" src="https://image.freepik.com/vector-gratis/hombre-de-negocios-con-una-gran-idea_1012-219.jpg" />
@@ -88,9 +91,9 @@ class stages extends Component {
               </div>
 
             </div>
-          </div>
+          </Col>
 
-          <div className=" col l3">
+          <Col l={3}>
             <div className="card">
               <div className="card-image">
                 <img alt="dos" src="https://media.wired.com/photos/5955b36196d7ef123a1d4273/master/w_1800,c_limit/529386299green-F-TOP-ART.jpg" />
@@ -101,9 +104,9 @@ class stages extends Component {
               </div>
 
             </div>
-          </div>
+          </Col>
 
-          <div className=" col l3">
+          <Col l={3}>
             <div className="card">
               <div className="card-image">
                 <img alt="dos" src="http://tamgroup-ye.com/wp-content/uploads/2016/12/Success-group-award-590x260.jpg" />
@@ -114,9 +117,9 @@ class stages extends Component {
               </div>
 
             </div>
-          </div>
+          </Col>
 
-        </div>
+        </Row>
       );
     }
   }

@@ -134,7 +134,7 @@ class profile extends Component {
                                 <p><b>Nacionality:</b></p></Col>
                             <Col l={5}>
                                 <p><b>Email:</b> {this.state.user.email} </p>
-                                <p><b>Reamining Coins:</b> </p></Col>
+                                <p><b>Reaimining Coins:</b> </p></Col>
                             <Col l={2}>
                                 <MediaBox className="responsive-img imageProfile" src={this.state.user.photoURL} caption={this.state.user.displayName} width="300px" /></Col>
                         </Row>
