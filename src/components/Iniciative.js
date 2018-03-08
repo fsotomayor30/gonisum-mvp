@@ -19,7 +19,7 @@ export default class Initiative extends Component {
 								style={{  width: 150, height: 150,paddingTop: 15, borderRadius: 7 }} />
 								<Row>
 									<span>{this.props.initiative.progressMoney}/{this.props.initiative.moneyMin} </span><Icon small>monetization_on</Icon>
-									<ProgressBar progress={70} />
+									<ProgressBar progress={(this.props.initiative.progressMoney / this.props.initiative.moneyMin) * 100} />
 								</Row>
 								<Row>
 									<span>{this.props.initiative.like}  </span><Icon small>thumb_up</Icon><span>  </span>
