@@ -142,3 +142,6 @@ background-color: rgb(242,242,242);
             transform: scale(1);
   }
 }
+  .imageProfile{
+      border-radius: 50%;
+  }
