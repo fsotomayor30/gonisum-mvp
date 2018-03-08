@@ -22,7 +22,7 @@ class listCommitteeIniciatives extends Component {
             let iniciatives = snapshot.val();
             let newState = [];
             for (let iniciative in iniciatives) {
-                if (iniciatives[iniciative].approved === 'not reviewed') {
+                if (iniciatives[iniciative].state === 'not reviewed') {
                     newState.push({
                         id: iniciative,
                         title: iniciatives[iniciative].title,
@@ -36,7 +36,7 @@ class listCommitteeIniciatives extends Component {
                         picture: iniciatives[iniciative].picture,
                         userId: iniciatives[iniciative].userId,
                         date: iniciatives[iniciative].date,
-                        approved: iniciatives[iniciative].approved,
+                        state: iniciatives[iniciative].state,
                         like: iniciatives[iniciative].like,
                         progressMoney: iniciatives[iniciative].progressMoney,
                         photoUser: iniciatives[iniciative].photoUser,
@@ -60,7 +60,6 @@ class listCommitteeIniciatives extends Component {
     }
 
     render() {
-
         if (this.state.iniciatives.length === 0) {
             return (
                 <CardPanel style={{ margin: 50 }} className="teal lighten-4 black-text">

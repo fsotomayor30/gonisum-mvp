@@ -55,7 +55,6 @@ class newIniciative extends Component {
             if (this.state.title === '' ||
                 this.state.categories === '' ||
                 this.state.moneyMin === 0 ||
-                this.state.moneyMax === 0 ||
                 this.state.description === '' ||
                 this.state.picture === null) {
                 alert("there can not be empty fields");
