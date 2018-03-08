@@ -119,9 +119,11 @@ class newIniciative extends Component {
             });
         }
         )
+        
     }
 
     render() {
+        
         return (
             <div className="card-panel" style={{ marginTop: 40, marginLeft: 20, marginRight: 20 }}>
                 <form>

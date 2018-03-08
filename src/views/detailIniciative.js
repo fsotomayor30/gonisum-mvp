@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import '../css/content.css';
 import firebase from 'firebase';
-import Iniciative from '../components/Iniciative'
-import { Icon, Row, Card, Chip, CardPanel, Col, ProgressBar, MediaBox, Input, CollectionItem } from 'react-materialize';
+
+import Comment from '../components/Comment'
+import { Icon, Row, Card, Chip, CardPanel, Modal, Col, ProgressBar, MediaBox, Input } from 'react-materialize';
 
 class detailIniciative extends Component {
 
@@ -13,7 +14,22 @@ class detailIniciative extends Component {
             user: null,
             id: match.params.id,
             iniciatives: [],
+            comments: [],
+            content: '',
+            money: 0,
         };
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSaveComment = this.handleSaveComment.bind(this);
+        this.contribute = this.contribute.bind(this);
+        this.Like=this.Like.bind(this);
+    }
+
+    handleInputChange(event) {
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            [name]: value,
+        });
     }
 
     componentDidMount() {
@@ -36,7 +52,7 @@ class detailIniciative extends Component {
                         picture: iniciatives[iniciative].picture,
                         userId: iniciatives[iniciative].userId,
                         date: iniciatives[iniciative].date,
-                        approved: iniciatives[iniciative].approved,
+                        state: iniciatives[iniciative].state,
                         like: iniciatives[iniciative].like,
                         progressMoney: iniciatives[iniciative].progressMoney,
                         photoUser: iniciatives[iniciative].photoUser,
@@ -49,6 +65,24 @@ class detailIniciative extends Component {
                 iniciatives: newState
             });
         });
+
+        const commentRef = firebase.database().ref('comment');
+        commentRef.on('value', (snapshot) => {
+            let comments = snapshot.val();
+            let newState = [];
+            for (let comment in comments) {
+                newState.push({
+                    id: comment,
+                    idIniciative: comments[comment].idIniciative,
+                    content: comments[comment].content,
+                    photoUser: comments[comment].photoUser,
+                    displayUser: comments[comment].displayUser,
+                });
+            }
+            this.setState({
+                comments: newState
+            });
+        });
     }
 
     componentWillMount() {
@@ -59,6 +93,54 @@ class detailIniciative extends Component {
         }
         )
     }
+
+    contribute() {
+        if (this.state.money > (this.state.iniciatives[0].moneyMax - this.state.iniciatives[0].progressMoney)) {
+            alert("I exceed the maximum limit")
+        } else {
+            const dbRefInvest = firebase.database().ref('iniciatives/' + this.state.iniciatives[0].id);
+            dbRefInvest.update({
+                progressMoney: parseInt(this.state.iniciatives[0].progressMoney, 10) + parseInt(this.state.money, 10),
+            });
+            this.setState({
+                money: 0,
+            });
+            alert("Thanks for contributing")
+
+        }
+    }
+
+    handleSaveComment() {
+        if (this.state.content === '') {
+            alert("There can not be empty fields");
+        } else {
+            const record = {
+                idIniciative: this.state.iniciatives[0].id,
+                content: this.state.content,
+                photoUser: this.state.user.photoURL,
+                displayUser: this.state.user.displayName,
+            };
+
+            const dbRef = firebase.database().ref('comment');
+            const newComment = dbRef.push();
+            newComment.set(record);
+            alert("added correctly");
+            this.setState({
+                content: '',
+            });
+        }
+    }
+
+    Like() {
+        
+          const dbRefInvest = firebase.database().ref('iniciatives/' + this.state.iniciatives[0].id);
+          dbRefInvest.update({
+            like: this.state.iniciatives[0].like+1,
+          });
+          alert("Thanks for your like")
+        
+    }
+
 
     render() {
         return (
@@ -76,7 +158,7 @@ class detailIniciative extends Component {
                                 {iniciative.displayUser}
                             </Chip>
                             <Row>
-                                <Col l={3}>
+                                <Col l={3} s={12}>
                                     <MediaBox style={{ marginTop: '30%' }} className="responsive-img" src={iniciative.picture} caption="A demo media box1" width="300px" />
 
                                 </Col>
@@ -84,7 +166,8 @@ class detailIniciative extends Component {
                                     <CardPanel className="teal lighten-4 black-text">
                                         <Row>
                                             <Col l={4}>
-                                                <p style={{ textAlign: "justify" }}><Icon>attach_money</Icon>State: {iniciative.state}</p>
+
+                                                <p style={{ textAlign: "justify" }}><Icon>content_paste</Icon>State: {iniciative.state}</p>
                                                 <p style={{ textAlign: "justify" }}><Icon>attach_money</Icon>Money Min: {iniciative.moneyMin}</p>
                                                 <p style={{ textAlign: "justify" }}><Icon>attach_money</Icon>Money Max: {iniciative.moneyMax}</p>
                                             </Col>
@@ -100,8 +183,8 @@ class detailIniciative extends Component {
                                             </Col>
                                         </Row>
                                         <Row>
-                                            <Col l={12}>
-                                            <span>{iniciative.like}  </span><Icon small>thumb_up</Icon><span></span>
+                                            <Col l={12} s={12} m={12}>
+                                                <span>{iniciative.like}</span><span onClick={this.Like}><Icon small>thumb_up</Icon></span>
                                                 <span>{iniciative.progressMoney}/{iniciative.moneyMin} </span><Icon small>monetization_on</Icon>
                                                 <ProgressBar progress={(iniciative.progressMoney / iniciative.moneyMin) * 100} />
                                             </Col>
@@ -113,7 +196,73 @@ class detailIniciative extends Component {
                                         <pre style={{ textAlign: "justify" }}><Icon>description</Icon>Description:  {iniciative.description}</pre>
                                     </CardPanel>
                                 </Col>
+
+                                <Modal
+                                    header='Invest'
+                                    trigger={<button className="btn btn-primary" style={{ marginTop: 10 }} type="submit">Invest  <i className="material-icons">monetization_on</i></button>}>
+                                    <Row>
+                                        <Input label="Money:"
+                                            style={{ textAlign: 'right' }}
+                                            s={12}
+                                            value={this.state.money}
+                                            onChange={this.handleInputChange}
+                                            name="money"
+                                            id="money" type="number"
+                                            className="form-control"
+                                            required="required" />
+                                    </Row>
+                                    <center>
+                                        <button
+                                            onClick={this.contribute}
+                                            type="button"
+                                            className="btn btn-success">Contribute!!</button>
+                                    </center>
+
+                                </Modal>
+
+                                <Col l={12}><CardPanel className="teal lighten-4 black-text">
+                                    <h1><Icon medium>comments</Icon> Comments</h1>
+                                    {this.state.comments.map((comment, i) => {
+                                        if (comment.idIniciative === iniciative.id) {
+                                            return (
+                                                <div key={i}>
+                                                    <Comment id={comment.id} displayUser={comment.displayUser} photoUser={comment.photoUser} idIniciative={comment.idIniciative} content={comment.content}></Comment>
+                                                    <hr />
+                                                </div>
+                                            )
+                                        }
+                                    })}
+
+
+                                    <center>
+                                        <div>
+                                            <Row>
+                                                <Input label="Comment:"
+                                                    s={12}
+                                                    icon="insert_comment"
+
+                                                    value={this.state.content}
+                                                    onChange={this.handleInputChange}
+                                                    style={{ resize: 'none' }}
+                                                    className="form-control"
+                                                    name="content"
+                                                    id="content"
+                                                    cols="30"
+                                                    rows="10"
+                                                    required="required" />
+                                            </Row>
+
+                                            <button
+                                                type="button"
+                                                onClick={this.handleSaveComment}
+                                                className="btn btn-success"><i className="material-icons">add_circle_outline</i> New Comment</button>
+
+                                        </div>
+                                    </center>
+                                </CardPanel></Col>
                             </Row>
+
+
                         </Card>
 
                     )
