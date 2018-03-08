@@ -10,6 +10,7 @@ export default class listAprovedIniciatives extends Component {
         super();
         this.state = {
             iniciatives: [],
+            _statate: false,
         };
     }
 
@@ -42,7 +43,8 @@ export default class listAprovedIniciatives extends Component {
                 }
             }
             this.setState({
-                iniciatives: newState
+                iniciatives: newState,
+                _statate: true,
             });
         });
     }
@@ -100,15 +102,29 @@ export default class listAprovedIniciatives extends Component {
                     </Card>
                 </Col>
                 <Col m={8} l={9}>
-                    <Row>
-                        {this.state.iniciatives.map((iniciative, i) => {
-                            return (
-                                <div key={i}>
-                                    <Iniciative initiative={iniciative} />
-                                </div>
-                            )
-                        })}
-                    </Row>
+                    {(!this.state._statate) ? (
+                        <div className="sk-circle">
+                            <div className="sk-circle1 sk-child"></div>
+                            <div className="sk-circle2 sk-child"></div>
+                            <div className="sk-circle3 sk-child"></div>
+                            <div className="sk-circle4 sk-child"></div>
+                            <div className="sk-circle5 sk-child"></div>
+                            <div className="sk-circle6 sk-child"></div>
+                            <div className="sk-circle7 sk-child"></div>
+                            <div className="sk-circle8 sk-child"></div>
+                            <div className="sk-circle9 sk-child"></div>
+                            <div className="sk-circle10 sk-child"></div>
+                            <div className="sk-circle11 sk-child"></div>
+                            <div className="sk-circle12 sk-child"></div>
+                        </div>) : (<Row>
+                            {this.state.iniciatives.map((iniciative, i) => {
+                                return (
+                                    <div key={i}>
+                                        <Iniciative initiative={iniciative} />
+                                    </div>
+                                )
+                            })}
+                        </Row>)}
                 </Col>
             </Row>
         )
