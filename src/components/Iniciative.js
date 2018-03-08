@@ -28,7 +28,7 @@ export default class Initiative extends Component {
 							</Col>
 							<Col m={6}>
 								<CardPanel className="teal lighten-4 black-text">
-									<span>{this.props.initiative.description}</span>
+									<span>{this.props.initiative.description.substring(0,150)+'...'}</span>
 								</CardPanel>
 							</Col>
 							<span>Backers: {this.props.initiative.collaborators} <Icon>supervisor_account</Icon></span>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../css/content.css'
-import { Col, Card, Row, Icon, Input, Collapsible, CollapsibleItem, Collection, CollectionItem } from 'react-materialize'
+import { Col, Card, Row, Icon, Input, Collapsible, CollapsibleItem, Collection, CollectionItem, Button } from 'react-materialize'
 import firebase from 'firebase'
 import Iniciative from '../components/Iniciative'
 
@@ -10,6 +10,7 @@ export default class listAprovedIniciatives extends Component {
         super();
         this.state = {
             iniciatives: [],
+            iniciativesFitered: [],
             _statate: false,
         };
     }
@@ -44,16 +45,23 @@ export default class listAprovedIniciatives extends Component {
             }
             this.setState({
                 iniciatives: newState,
+                iniciativesFiltered: newState,
                 _statate: true,
             });
         });
     }
 
-    filter = (cat) => {
+    filterCategory = (cat) => {
         this.setState({
-            iniciatives: this.state.iniciatives.filter(
+            iniciativesFiltered: this.state.iniciatives.filter(
                 (iniciative) => iniciative.categories === cat
             )
+        });
+    };
+
+    reset = () => {
+        this.setState({
+            iniciativesFiltered: this.state.iniciatives
         });
     };
 
@@ -66,12 +74,19 @@ export default class listAprovedIniciatives extends Component {
                             <Row>
                                 <Input s={12} label="Search" validate><Icon>search</Icon></Input>
                             </Row>
+                            <Button onClick={this.reset}>Reset</Button>
                             <Collapsible>
                                 <CollapsibleItem header='Categories' icon='whatshot'>
                                     <Collection>
-                                        <CollectionItem href='#'>Infrastructure</CollectionItem>
-                                        <CollectionItem href='#'>Climate and Culture</CollectionItem>
-                                        <CollectionItem href='#'>Solidarity Fund</CollectionItem>
+                                        <span onClick={() => this.filterCategory("Infrastructure")}>
+                                            <CollectionItem href='#'>Infrastructure</CollectionItem>
+                                        </span>
+                                        <span onClick={() => this.filterCategory("Climate and Culture")}>
+                                            <CollectionItem href='#'>Climate and Culture</CollectionItem>
+                                        </span>
+                                        <span onClick={() => this.filterCategory("Solidarity Fund")}>
+                                            <CollectionItem href='#'>Solidarity Fund</CollectionItem>
+                                        </span>
                                     </Collection>
                                 </CollapsibleItem>
                                 <CollapsibleItem header='Status' icon='thumb_up'>
@@ -89,8 +104,22 @@ export default class listAprovedIniciatives extends Component {
                             <Collapsible>
                                 <CollapsibleItem header='Likes' icon='thumb_up'>
                                     <Collection>
-                                        <CollectionItem href='#'>By Higher</CollectionItem>
-                                        <CollectionItem href='#'>By Lower</CollectionItem>
+                                        <span onClick={() => {
+                                            this.setState({
+                                                iniciativesFiltered: this.state.iniciativesFiltered.sort(
+                                                    (a, b) => b.like - a.like)
+                                            });
+                                        }}>
+                                            <CollectionItem href='#'>Descending</CollectionItem>
+                                        </span>
+                                        <span onClick={() => {
+                                            this.setState({
+                                                iniciativesFiltered: this.state.iniciativesFiltered.reverse(
+                                                    (a, b) => b.like - a.like)
+                                            });
+                                        }}>
+                                            <CollectionItem href='#'>Ascending</CollectionItem>
+                                        </span>
                                     </Collection>
                                 </CollapsibleItem>
                                 <CollapsibleItem header='Comments' icon='comments'>
@@ -125,7 +154,7 @@ export default class listAprovedIniciatives extends Component {
                             <div className="sk-circle11 sk-child"></div>
                             <div className="sk-circle12 sk-child"></div>
                         </div>) : (<Row>
-                            {this.state.iniciatives.map((iniciative, i) => {
+                            {this.state.iniciativesFiltered.map((iniciative, i) => {
                                 return (
                                     <div key={i}>
                                         <Iniciative initiative={iniciative} />
