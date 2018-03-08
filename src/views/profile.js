@@ -13,6 +13,7 @@ class profile extends Component {
             iniciatives: [],
             comments: [],
             contributions: [],
+            _statate: false,
         };
     }
 
@@ -97,14 +98,32 @@ class profile extends Component {
                 }
             }
             this.setState({
-                comments: newState
+                comments: newState,
+                _statate: true,
             });
         });
     }
 
     render() {
-        if (this.state.user) {
-            return (
+        return(
+<Row>
+                {(!this.state._statate) ? (
+                    <div className="sk-circle">
+                        <div className="sk-circle1 sk-child"></div>
+                        <div className="sk-circle2 sk-child"></div>
+                        <div className="sk-circle3 sk-child"></div>
+                        <div className="sk-circle4 sk-child"></div>
+                        <div className="sk-circle5 sk-child"></div>
+                        <div className="sk-circle6 sk-child"></div>
+                        <div className="sk-circle7 sk-child"></div>
+                        <div className="sk-circle8 sk-child"></div>
+                        <div className="sk-circle9 sk-child"></div>
+                        <div className="sk-circle10 sk-child"></div>
+                        <div className="sk-circle11 sk-child"></div>
+                        <div className="sk-circle12 sk-child"></div>
+                    </div>) : (<Row>
+                        {(this.state.user) ? (
+            
                 <Row>
                     <h1>My Profile</h1>
                     <div className="card-panel" style={{ marginTop: 40, marginLeft: 20, marginRight: 20 }}>
@@ -155,11 +174,17 @@ class profile extends Component {
                     </div>
                 </Row>
 
-            )
+            
 
-        } else {
-            return null;
-        }
+                         ):(
+            null
+                         )
+                        }
+                        </Row>)}
+            </Row>
+
+        )
+        
     }
 }
 

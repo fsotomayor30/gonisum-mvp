@@ -12,6 +12,7 @@ class myIniciatives extends Component {
         this.state = {
             user: null,
             iniciatives: [],
+            _statate: false,
         };
     }
 
@@ -53,36 +54,54 @@ class myIniciatives extends Component {
                 }
             }
             this.setState({
-                iniciatives: newState
+                iniciatives: newState,
+                _statate: true,
             });
         });
     }
 
     render() {
 
-        if (this.state.iniciatives.length === 0) {
-            return (
-                <CardPanel style={{ margin: 50 }} className="teal lighten-4 black-text">
-                    <h1>You have no initiatives, do not wait to propose</h1>
-                    <img style={{ width: '30%' }} src='http://www.pngmart.com/files/1/Idea-Bulb-Transparent-PNG.png' alt='Person' />
-                </CardPanel>
 
-            )
-        } else {
-            return (
-                <Row>
-                    {this.state.iniciatives.map((iniciative, i) => {
-                        return (
-                            <Iniciative initiative={iniciative} />
-                        )
-                    })}
+        return (
+            <Row>
+                {(!this.state._statate) ? (
+                    <div className="sk-circle">
+                        <div className="sk-circle1 sk-child"></div>
+                        <div className="sk-circle2 sk-child"></div>
+                        <div className="sk-circle3 sk-child"></div>
+                        <div className="sk-circle4 sk-child"></div>
+                        <div className="sk-circle5 sk-child"></div>
+                        <div className="sk-circle6 sk-child"></div>
+                        <div className="sk-circle7 sk-child"></div>
+                        <div className="sk-circle8 sk-child"></div>
+                        <div className="sk-circle9 sk-child"></div>
+                        <div className="sk-circle10 sk-child"></div>
+                        <div className="sk-circle11 sk-child"></div>
+                        <div className="sk-circle12 sk-child"></div>
+                    </div>) : (<Row>
+                        {(this.state.iniciatives.length === 0) ? (
 
-                </Row>
+                            <CardPanel style={{ margin: 50 }} className="teal lighten-4 black-text">
+                                <h1>You have no initiatives, do not wait to propose</h1>
+                                <img style={{ width: '30%' }} src='http://www.pngmart.com/files/1/Idea-Bulb-Transparent-PNG.png' alt='Person' />
+                            </CardPanel>
+                        ) : (
+                                <Row>
+                                    {this.state.iniciatives.map((iniciative, i) => {
+                                        return (
+                                            <Iniciative initiative={iniciative} />
+                                        )
+                                    })}
+
+                                </Row>
+
+                            )}
+                        </Row>)}
+            </Row>
+        )
 
 
-
-            )
-        }
 
 
     }
