@@ -77,6 +77,8 @@ class detailIniciative extends Component {
                     content: comments[comment].content,
                     photoUser: comments[comment].photoUser,
                     displayUser: comments[comment].displayUser,
+                    idUser: comments[comment].idUser,
+                    titleIniciative: comments[comment].titleIniciative,
                 });
             }
             this.setState({
@@ -102,11 +104,22 @@ class detailIniciative extends Component {
             dbRefInvest.update({
                 progressMoney: parseInt(this.state.iniciatives[0].progressMoney, 10) + parseInt(this.state.money, 10),
             });
+            
+            const record = {
+                idAuthor: this.state.user.uid,
+                idInitiative: this.state.iniciatives[0].id,
+                amount: parseInt(this.state.money,10),
+                titleInitiative: this.state.iniciatives[0].title,
+
+            };
+
+            const dbRef = firebase.database().ref('contributions');
+            const newContributions= dbRef.push();
+            newContributions.set(record);
             this.setState({
                 money: 0,
             });
             alert("Thanks for contributing")
-
         }
     }
 
@@ -119,6 +132,8 @@ class detailIniciative extends Component {
                 content: this.state.content,
                 photoUser: this.state.user.photoURL,
                 displayUser: this.state.user.displayName,
+                idUser: this.state.user.uid,
+                titleIniciative: this.state.iniciatives[0].title,
             };
 
             const dbRef = firebase.database().ref('comment');
@@ -201,7 +216,7 @@ class detailIniciative extends Component {
                                     header='Invest'
                                     trigger={<button className="btn btn-primary" style={{ marginTop: 10 }} type="submit">Invest  <i className="material-icons">monetization_on</i></button>}>
                                     <Row>
-                                        <Input label="Money:"
+                                        <Input label="Nisum Coins:"
                                             style={{ textAlign: 'right' }}
                                             s={12}
                                             value={this.state.money}

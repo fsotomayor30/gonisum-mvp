@@ -11,6 +11,8 @@ class profile extends Component {
         this.state = {
             user: null,
             iniciatives: [],
+            comments: [],
+            contributions: [],
         };
     }
 
@@ -55,36 +57,100 @@ class profile extends Component {
             });
         });
 
+        const contributionsItems = firebase.database().ref('contributions');
+        contributionsItems.on('value', (snapshot) => {
+            let contributions = snapshot.val();
+            let newState = [];
+            for (let contribution in contributions) {
+                if (this.state.user.uid === contributions[contribution].idAuthor) {
+                    newState.push({
+                        id: contribution,
+                        idAuthor: contributions[contribution].idAuthor,
+                        idInitiative: contributions[contribution].idInitiative,
+                        amount: contributions[contribution].amount,
+                        titleInitiative: contributions[contribution].titleInitiative,
+                        
+                    });
+                }
+            }
+            this.setState({
+                contributions: newState
+            });
+        });
+
+        const commentRef = firebase.database().ref('comment');
+        commentRef.on('value', (snapshot) => {
+            let comments = snapshot.val();
+            let newState = [];
+            for (let comment in comments) {
+                if (this.state.user.uid === comments[comment].idUser) {
+                    newState.push({
+                        id: comment,
+                        content: comments[comment].content,
+                        displayUser: comments[comment].displayUser,
+                        idIniciative: comments[comment].idIniciative,
+                        photoUser: comments[comment].photoUser,
+                        idUser: comments[comment].idUser,
+                        titleIniciative: comments[comment].titleIniciative,
+  
+                    });
+                }
+            }
+            this.setState({
+                comments: newState
+            });
+        });
     }
 
     render() {
         if (this.state.user) {
             return (
                 <Row>
+                    <h1>My Profile</h1>
                     <div className="card-panel" style={{ marginTop: 40, marginLeft: 20, marginRight: 20 }}>
                         <Row>
                             <Col l={5}>
-                                <p>Name: {this.state.user.displayName}</p>
-                                <p>Location: </p>
-                                Nacionality:</Col>
+                                <p><b>Name:</b> {this.state.user.displayName}</p>
+                                <p><b>Location:</b> </p>
+                                <p><b>Nacionality:</b></p></Col>
                             <Col l={5}>
-                                <p>Email: {this.state.user.email} </p>
-                                <p>Reamining Coins: </p></Col>
+                                <p><b>Email:</b> {this.state.user.email} </p>
+                                <p><b>Reamining Coins:</b> </p></Col>
                             <Col l={2}>
-                                <MediaBox className="responsive-img" src={this.state.user.photoURL} caption="A demo media box1" width="300px" /></Col>
+                                <MediaBox className="responsive-img imageProfile" src={this.state.user.photoURL} caption={this.state.user.displayName} width="300px" /></Col>
                         </Row>
                         <Row>
-                            <Col l={4}><div className="card-panel"><p><b>Funded Initiatives: </b></p></div></Col>
+                            <Col l={4}><div className="card-panel"><p><b>Funded Initiatives: </b>
+                            {this.state.contributions.map((contribution, i) => {
+                                    return (
+                                        <p style={{ textAlign: 'left' }} key={i}>
+                                            {i + 1}.- {contribution.titleInitiative} ({contribution.amount} Nisum Coins)
+                                            <hr/>
+                                        </p>
+                                    )
+                                })}
+
+                            </p></div></Col>
                             <Col l={4}><div className="card-panel"><p><b>My Initiatives: </b>
                                 {this.state.iniciatives.map((iniciative, i) => {
                                     return (
-                                        <li key={i}>
-                                            {iniciative.title}
-                                        </li>
+                                        <p style={{ textAlign: 'left' }} key={i}>
+                                            {i + 1}.- {iniciative.title}
+                                            <hr/>
+                                        </p>
                                     )
                                 })}
                             </p></div></Col>
-                            <Col l={4}><div className="card-panel"><p><b>Likes / Comments</b></p></div></Col>
+                            <Col l={4}><div className="card-panel"><p><b>Comments</b>
+                                {this.state.comments.map((comment, i) => {
+                                    return (
+                                        <p style={{ textAlign: 'left' }} key={i}>
+                                            {i + 1}.- Commented on {comment.titleIniciative}: <p style={{ textAlign: 'center' }}><i>"{comment.content}"</i></p>
+                                        <hr/>
+                                        </p>
+                                    )
+                                })}
+                            </p></div></Col>
                         </Row>
                     </div>
                 </Row>
