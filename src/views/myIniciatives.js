@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/content.css';
 import Iniciative from '../components/Iniciative'
 import firebase from 'firebase';
-import { CardPanel, Row, Col } from 'react-materialize';
+import { CardPanel, Row } from 'react-materialize';
 
 class myIniciatives extends Component {
 

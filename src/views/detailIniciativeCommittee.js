@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../css/content.css';
 import firebase from 'firebase';
-import { Icon, Row, Card, Chip, CardPanel, Col, ProgressBar, MediaBox, Input, CollectionItem } from 'react-materialize';
+import { Icon, Row, Card, Chip, CardPanel, Col, MediaBox, Input } from 'react-materialize';
 
 class detailIniciativeCommittee extends Component {
 
@@ -98,7 +98,7 @@ class detailIniciativeCommittee extends Component {
             <div>
                 {this.state.iniciatives.map((iniciative, i) => {
                     return (
-                        
+
                         <Card style={{ marginTop: 40, marginLeft: 20, marginRight: 20 }} key={i}>
                             <h1>{iniciative.title}
                                 <hr />
@@ -111,10 +111,10 @@ class detailIniciativeCommittee extends Component {
                             <Row>
                                 <Col l={3}>
                                     <MediaBox style={{ marginTop: '30%' }} className="responsive-img" src={iniciative.picture} caption="A demo media box1" width="300px" />
-                                    
+
                                 </Col>
                                 <Col l={9}>
-                                <CardPanel className="teal lighten-4 black-text">
+                                    <CardPanel className="teal lighten-4 black-text">
                                         <Row>
 
                                             <Col l={4}>
@@ -173,7 +173,7 @@ class detailIniciativeCommittee extends Component {
                                 <br />
                             </div>
                         </Card>
-                        
+
                     )
                 })}
             </div>

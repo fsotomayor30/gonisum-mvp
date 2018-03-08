@@ -21,7 +21,7 @@ class detailIniciative extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSaveComment = this.handleSaveComment.bind(this);
         this.contribute = this.contribute.bind(this);
-        this.Like=this.Like.bind(this);
+        this.Like = this.Like.bind(this);
     }
 
     handleInputChange(event) {
@@ -104,17 +104,17 @@ class detailIniciative extends Component {
             dbRefInvest.update({
                 progressMoney: parseInt(this.state.iniciatives[0].progressMoney, 10) + parseInt(this.state.money, 10),
             });
-            
+
             const record = {
                 idAuthor: this.state.user.uid,
                 idInitiative: this.state.iniciatives[0].id,
-                amount: parseInt(this.state.money,10),
+                amount: parseInt(this.state.money, 10),
                 titleInitiative: this.state.iniciatives[0].title,
 
             };
 
             const dbRef = firebase.database().ref('contributions');
-            const newContributions= dbRef.push();
+            const newContributions = dbRef.push();
             newContributions.set(record);
             this.setState({
                 money: 0,
@@ -147,13 +147,13 @@ class detailIniciative extends Component {
     }
 
     Like() {
-        
-          const dbRefInvest = firebase.database().ref('iniciatives/' + this.state.iniciatives[0].id);
-          dbRefInvest.update({
-            like: this.state.iniciatives[0].like+1,
-          });
-          alert("Thanks for your like")
-        
+
+        const dbRefInvest = firebase.database().ref('iniciatives/' + this.state.iniciatives[0].id);
+        dbRefInvest.update({
+            like: this.state.iniciatives[0].like + 1,
+        });
+        alert("Thanks for your like")
+
     }
 
 
@@ -245,7 +245,7 @@ class detailIniciative extends Component {
                                                     <hr />
                                                 </div>
                                             )
-                                        }
+                                        }else{return null;}
                                     })}
 
 
